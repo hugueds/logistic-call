@@ -1,40 +1,46 @@
 import React, { Component } from 'react';
-import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+
+
 
 import MainContainer from './containers/MainContainer';
 import ConfigContainer from './containers/ConfigContainer';
+import GroupContainer from './containers/GroupContainer';
 
-
+import './css/App.css';
+import Navbar from './components/Navbar';
 
 class App extends Component {
 
 
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       user: localStorage.getItem('user'),
       groupId: +localStorage.getItem('groupId')
     }
-
-    console.log(this.state)
   }
 
-  
-  render() {    
-    console.log(this.state.groupId)
-    return (      
+
+  render() {
+    return (
       <BrowserRouter>
-        <Switch>
-          <Route path="/home" component={MainContainer} />
-          <Route path="/config" component={ConfigContainer} />
-          {
-            this.state.groupId == null 
-            ? <Redirect to="/config" /> 
-            : <Redirect to="/home" />
-          }
-          
-        </Switch>
+        <div className="main-container">
+          <Navbar />
+          <div className="content-container">
+            <Switch>
+              <Route path="/home" component={MainContainer} />
+              <Route path="/config" component={ConfigContainer} />
+              <Route path="/groups" component={GroupContainer} />
+              {
+                this.state.groupId == null
+                  ? <Redirect to="/config" />
+                  : <Redirect to="/home" />
+              }
+
+            </Switch>
+          </div>
+        </div>
       </BrowserRouter>
     );
   }
@@ -44,7 +50,7 @@ class App extends Component {
 // class AllRoutes extends Component {
 //   render() {
 //     return (
-      
+
 //     );
 //   }
 // }

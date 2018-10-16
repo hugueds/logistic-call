@@ -1,0 +1,25 @@
+body {
+  margin: 0 auto;  
+  background: lightyellow;
+}
+
+.app-bar {
+  width: 100%;
+}
+
+.content-container {
+  margin: 0 auto;
+  width: 97%;
+}
+
+.not-selected {  
+  cursor: default;
+  color: black;
+  text-decoration: none;
+}
+
+.selected {
+  color: lightgray;
+  pointer-events: none;
+  text-decoration: none;
+}

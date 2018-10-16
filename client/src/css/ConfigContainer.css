@@ -1,0 +1,59 @@
+.config-container {
+    
+}
+
+.group-selection {
+    display: flex;
+    border: 1px solid #000;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+
+
+.available-groups-container {
+    margin: 0 auto;
+    display: flex;    
+    justify-content: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.group-title {
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;    
+    border: 1px solid #000;
+    font-size: 1.5rem;
+    
+}
+
+.groups-container-body {
+    display: flex;
+    border: 1px solid #000;   
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.group-wrapper {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.group-header {
+    display: flex;    
+    border: 1px solid #000;   
+    width: 100%;
+}
+
+.group-station {
+    display: flex;
+    width: 5%;
+    justify-content: center;
+    margin: 1% 1% 1% 1%;    
+    border: 1px solid #000;    
+}

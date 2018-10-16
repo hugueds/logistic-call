@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import CONFIG from '../config';
+
 import MissingPart from '../components/MissingPart';
 import { emit, subscribe } from '../socketClient';
+
+import '../css/MainContainer.css';
+
+import TestButton from '../components/TestButton';
+
+
 
 export default class MainContainer extends Component {
 
@@ -9,6 +18,7 @@ export default class MainContainer extends Component {
         super(props);
 
         const groupId = localStorage.getItem('groupId');
+        this.audio = window.document.querySelector('audio');
 
         if (groupId === null) {
             window.location.href = '/config';
@@ -16,28 +26,75 @@ export default class MainContainer extends Component {
 
         this.state = {
             groupId: +groupId,
-            partList: []
-        }
+            partList: [...partList]
+        };
 
-        subscribe('dec-part', this.handlePartEvent);
-        emit('ping', 'pong');
+        this.getPartsByGroup(this.state.groupId);
 
+        subscribe('list update', this.handlePartEvent);
+    }
+
+    getPartsByGroup = (groupId) => {
+        const url = CONFIG.apiServer + '/api/groups/' + groupId;
+        axios.get(url).then(partList => this.setState({ partList: [...partList.data] }))
+        // axios.get(url).then(partList => console.log(partList))
     }
 
 
     handlePartEvent = (err, data) => {
-        console.log(data);
+        // faz uma requisição baseada no ID do grupo
+        // atualiza todas as peças               
+        // this.audio.load();
+
+        this.getPartsByGroup(this.state.groupId);
+        if (data) {
+            console.log('Data received from socket:',data);      
+            if (!data.mute)  {                
+                document.querySelector('#test-button').click()
+            }
+        } 
+    }
+
+    handleTestButton = (parameter) => {        
+        this.audio.play();        
+        const pl = [...this.state.partList, parameter];
+        this.setState({
+            partList: pl
+        })
+        console.log(parameter);
+    }
+
+    handleConfirm = (missingPart) => {
+        let part = this.state.partList.find(p => p._id == missingPart._id);
+        if (!part) {
+            part =  {
+                _id : 0
+            }
+        }
+        console.log(part)
+        emit('confirm part', part);
     }
 
 
     render() {
 
         return (
-            <div>
-                <div>GROUP ID: {this.state.groupId}</div>
-                {
-                    partList.map((p, key) => <MissingPart key={key} missingPart={p} />)
-                }
+            <div className="wrapper">
+                
+                <div className="" > GROUP ID: {this.state.groupId}</div>
+                <div className="header" >
+                    <div> PEÇA </div>
+                    <div> BUFFER </div>
+                    <div> MODULO </div>
+                    <div> DATA </div>
+                    <div>  </div>
+                </div>
+                <div className="missing-part-container">
+                    {
+                        this.state.partList.map((p, key) => <MissingPart id={key} key={key} missingPart={p} handleConfirm={this.handleConfirm} />)
+                    }
+                </div>
+                <TestButton handleTestButton={this.handleTestButton} />
             </div>
         )
     }
@@ -45,10 +102,7 @@ export default class MainContainer extends Component {
 
 }
 
-const partList =
-    [
-        { partNumber: '123', buffer: '123', module: '123', date: 123 },
-        { partNumber: '111', buffer: '111', module: '111', date: 111 },
-        { partNumber: '222', buffer: '222', module: '222', date: 222 },
-        { partNumber: '333', buffer: '333', module: '333', date: 333 },
-    ]
+const partList = [
+    { _id: 0, part: 0, module: 0, buffer: 0, date: 0 }
+];
+

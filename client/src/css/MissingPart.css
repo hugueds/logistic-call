@@ -1,0 +1,32 @@
+.missing-part-row {
+    display: flex;
+    justify-items: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.missing-part-row:nth-child(even) {
+    background: #DDDDDD;
+}
+
+
+.missing-part-row .missing-part-column {    
+    flex: 1 1 auto;
+    text-align: center;
+    width: 10%;
+    font-size: 1.5rem;
+    padding: 1rem 0 1rem 0;
+}
+
+
+
+.missing-part-column-button {
+    display: flex;
+    /* width: 16.5%; */
+    justify-content: center;
+    justify-items: center;
+}
+
+.missing-part-container {
+    
+}
