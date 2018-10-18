@@ -8,6 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import { ListItemIcon, ListItemText } from '@material-ui/core';
+import SendIcon from '@material-ui/icons/Send';
 
 export default class Navbar extends Component {
 
@@ -43,11 +45,21 @@ export default class Navbar extends Component {
                         </IconButton>
 
                         <Menu id="main-menu" anchorEl={anchorEl} open={open} onClose={this.handleClose} >
+                        
                             <MenuItem onClick={this.handleClose}>
-                            <NavLink className="not-selected" activeClassName="selected" to="/home" >INICIO</NavLink>
+                                <ListItemIcon>
+                                    <SendIcon />
+                                </ListItemIcon>
+
+                                <NavLink className="not-selected" activeClassName="selected" to="/home">
+                                    <ListItemText  primary="INICIO" />
+                                </NavLink>
                             </MenuItem>
+
                             <MenuItem onClick={this.handleClose} >
-                                <NavLink className="not-selected" activeClassName="selected" to="/config" >DISPOSITIVO</NavLink>
+                                <NavLink className="not-selected" activeClassName="selected" to="/config" >
+                                DISPOSITIVO
+                                </NavLink>
                             </MenuItem>
                             <MenuItem onClick={this.handleClose} >
                                 <NavLink className="not-selected" activeClassName="selected" to="/groups" >GRUPOS</NavLink>

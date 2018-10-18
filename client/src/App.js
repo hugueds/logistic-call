@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
-
-
 import MainContainer from './containers/MainContainer';
 import ConfigContainer from './containers/ConfigContainer';
-import GroupContainer from './containers/GroupContainer';
+import EditGroupContainer from './containers/EditGroupContainer';
 
 import './css/App.css';
 import Navbar from './components/Navbar';
@@ -31,7 +29,7 @@ class App extends Component {
             <Switch>
               <Route path="/home" component={MainContainer} />
               <Route path="/config" component={ConfigContainer} />
-              <Route path="/groups" component={GroupContainer} />
+              <Route path="/groups" component={EditGroupContainer} />
               {
                 this.state.groupId == null
                   ? <Redirect to="/config" />

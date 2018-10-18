@@ -1,0 +1,65 @@
+.edit-group-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.edit-group-button-container {
+    display: flex;    
+    width: 100%;
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.edit-group-button {    
+    width: 100%;
+}
+
+.edit-group-button-title {
+    margin-top: 2%;    
+    text-align: center;
+}
+
+.edit-group-button-element {
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    margin-top: 2%;
+    
+}
+
+.edit-station-container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    
+}
+
+.edit-station-button-title {
+    width: 100%;    
+    text-align: center;
+    font-size: 1.5rem;    
+}
+
+.edit-station-select {    
+    flex: 1 1 auto;
+    border: 1px solid red;
+    width: 50%;
+}
+
+.edit-station-button-container {
+    justify-content: space-evenly;
+    display: flex;
+    width: 100%;
+}
+
+
+
+/* .edit-group-container div{
+    display: flex;    
+    
+} */
+
+.todo-list {
+    display: flex;
+    width: 100%;
+}

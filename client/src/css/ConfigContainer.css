@@ -1,15 +1,21 @@
 .config-container {
-    
+    color: black;
 }
 
 .group-selection {
     display: flex;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     width: 100%;
     flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2%;
 }
 
-
+.group-select {
+    display: flex;
+    width: 25%;
+    margin: 0 auto;
+}
 
 .available-groups-container {
     margin: 0 auto;
@@ -17,6 +23,7 @@
     justify-content: center;
     width: 100%;
     flex-wrap: wrap;
+    margin-top: 5%;
 }
 
 .group-title {
@@ -24,14 +31,14 @@
     width: 100%;
     text-align: center;
     justify-content: center;    
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     font-size: 1.5rem;
     
 }
 
 .groups-container-body {
     display: flex;
-    border: 1px solid #000;   
+    /* border: 1px solid #000;    */
     width: 100%;
     flex-wrap: wrap;
 }
@@ -48,12 +55,24 @@
     display: flex;    
     border: 1px solid #000;   
     width: 100%;
+    font-size: 1.3rem;
+}
+
+.group-header-selected {
+    background-color: dodgerblue;    
 }
 
 .group-station {
     display: flex;
     width: 5%;
     justify-content: center;
-    margin: 1% 1% 1% 1%;    
-    border: 1px solid #000;    
+    margin: 1% 1% 1% 1%;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;        
+    color: white;
+    background: #000;
+    border-radius: 10%;
+    font-weight: bold;
+}
+.group-station-selected {    
+    background: dodgerblue;
 }
