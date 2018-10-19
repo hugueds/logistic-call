@@ -141,13 +141,13 @@ export default class GroupContainer extends Component {
           handleClickedGroup={this.handleClickedGroup}
           handleClickedStation={this.handleClickedStation}
           items={groupList}
+          stationList={stationList}
           selectedStation={selectedStation}
           selectedGroup={selectedGroup}
-        />
+        />        
 
-        
-
-      </div >
+      </div>
+      
     )
   }
 }
