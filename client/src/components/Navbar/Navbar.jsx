@@ -64,6 +64,9 @@ export default class Navbar extends Component {
                             <MenuItem onClick={this.handleClose} >
                                 <NavLink className="not-selected" activeClassName="selected" to="/groups" >GRUPOS</NavLink>
                             </MenuItem>
+                            <MenuItem onClick={this.handleClose} >
+                                <NavLink className="not-selected" activeClassName="selected" to="/corredores" >CORREDORES</NavLink>
+                            </MenuItem>
                             <MenuItem onClick={this.handleClose}>
                                 SOBRE
                             </MenuItem>

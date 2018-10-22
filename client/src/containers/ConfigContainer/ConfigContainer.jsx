@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core';
 
+import { getGroups } from '../../utils/apiCalls';
+import GroupList from '../../components/GroupList';
 
-import GroupList from '../components/GroupList';
+import './ConfigContainer.css';
 
 export default class ConfigContainer extends Component {
 
@@ -16,12 +18,12 @@ export default class ConfigContainer extends Component {
     groupList: []
   }
 
-
   componentDidMount() {
-    getGroups().then((groupList) => {
+    getGroups().then(groupList => {
       const orderedGroupList = groupList.sort((a, b) => a._id > b._id);
-      this.setState({ groupList: [...orderedGroupList] })
+        this.setState({ groupList: [...orderedGroupList] })
     });
+    
   }
 
   updateGroupId = (e) => {
@@ -72,7 +74,3 @@ export default class ConfigContainer extends Component {
   }
 }
 
-async function getGroups() {
-  return await fetch('http://10.8.66.81:8083/api/groups')
-    .then((res) => res.json())
-}

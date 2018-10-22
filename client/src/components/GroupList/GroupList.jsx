@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { Button } from '@material-ui/core';
 
-import '../css/ConfigContainer.css';
+import './GroupList.css';
 
 export default class GroupList extends Component {
 

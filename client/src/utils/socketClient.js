@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client';
-import CONFIG from './config';
+import CONFIG from '../config';
 
 const socket = openSocket(CONFIG.socketServer);
 

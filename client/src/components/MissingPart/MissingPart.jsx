@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from '@material-ui/core';
-import '../css/MissingPart.css';
+import './MissingPart.css';
 
 export default class MissingPart extends Component {
   render() {

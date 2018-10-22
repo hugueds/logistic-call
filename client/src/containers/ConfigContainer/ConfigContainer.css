@@ -1,0 +1,19 @@
+.config-container {
+    color: black;    
+}
+
+.group-selection {
+    display: flex;    
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2%;
+    text-align: center;
+}
+
+.group-select {
+    display: flex;
+    width: 25%;
+    margin: 0 auto;
+}
+

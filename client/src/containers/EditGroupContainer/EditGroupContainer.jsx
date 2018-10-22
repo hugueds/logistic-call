@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Button, Select, FormControl, MenuItem } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import DeleteIcon from '@material-ui/icons/Delete'
+import DeleteIcon from '@material-ui/icons/Delete';
 
+import { 
+  getGroups, 
+  getStations, 
+  addNewGroup, 
+  addStationToGroup, 
+  removeStationFromGroup, 
+  removeGroup } from '../../utils/apiCalls';
 
-import GroupList from '../components/GroupList';
+import GroupList from '../../components/GroupList';
 
-import '../css/EditGroupContainer.css';
+import './EditGroupContainer.css';
 
 export default class GroupContainer extends Component {
 
@@ -35,33 +41,21 @@ export default class GroupContainer extends Component {
     })
   }
 
-  addNewGroup = () => {
-    axios.get('http://10.8.66.81:8083/api/groups/create').then(this.updateLists);
-  };
-
-  removeGroup = () => {
-    const q = window.confirm('Deseja mesmo excluir este grupo?');
-    if (!q) return;
-    axios.delete('http://10.8.66.81:8083/api/groups/' + this.state.selectedGroup).then(this.updateLists);
+  addNewStationToGroup = () => {
+    addStationToGroup(this.state.selectedGroup, this.state.newStation).then(this.updateLists);
   }
 
-  addNewStationToGroup = (e) => {
-    axios.post('http://10.8.66.81:8083/api/station', {
-      _id: this.state.selectedGroup,
-      station: +this.state.newStation
-    })
-      .then(this.updateLists);
+  removeStationFromGroup = () => {
+    removeStationFromGroup(this.state.selectedGroup, this.state.selectedStation).then(this.updateLists);
   }
 
-  removeStationFromGroup = (e) => {
-    axios.delete('')
-    axios.delete('http://10.8.66.81:8083/api/station/', {
-      data: {
-        _id: +this.state.selectedGroup,
-        station: this.state.selectedStation
-      }
-    })
-      .then(this.updateLists);
+  handleNewGroup = () => {
+    addNewGroup().then(this.updateLists);
+  }
+
+  handleRemoveGroup = () => {
+    const group = this.state.selectedGroup;
+    removeGroup(group).then(this.updateLists);
   }
 
   updateNewStation = (e) => {
@@ -94,7 +88,7 @@ export default class GroupContainer extends Component {
           <div className="edit-group-button">
             <div className="edit-group-button-title" > ADICIONAR NOVO GRUPO </div>
             <div className="edit-group-button-element">
-              <Button variant="fab" style={{ background: 'limegreen', color: 'white' }} onClick={this.addNewGroup}>
+              <Button variant="fab" style={{ background: 'limegreen', color: 'white' }} onClick={this.handleNewGroup}>
                 <AddIcon />
               </Button>
             </div>
@@ -104,14 +98,14 @@ export default class GroupContainer extends Component {
           <div className="edit-group-button">
             <div className="edit-group-button-title" > REMOVER GRUPO </div>
             <div className="edit-group-button-element">
-              <Button disabled={selectedGroup === null} variant="fab" color="secondary" onClick={this.removeGroup}>
+              <Button disabled={selectedGroup === null} variant="fab" color="secondary" onClick={this.handleRemoveGroup}>
                 <DeleteIcon />
               </Button>
             </div>
           </div>
         </div>
 
-        <div className="edit-station-container" style={{display : selectedGroup === null ? 'none' : null }}>
+        <div className="edit-station-container" style={{ display: selectedGroup === null ? '' : null }}>
 
           <div className="edit-station-button-title">EDITAR POSTOS</div>
 
@@ -119,17 +113,16 @@ export default class GroupContainer extends Component {
             <Select
               value={newStation}
               onChange={this.updateNewStation}
-              
             >
               {options}
             </Select>
           </FormControl>
 
           <div className="edit-station-button-container">
-            <Button variant="fab" onClick={this.addNewStationToGroup} >
+            <Button variant="fab" mini color="primary" onClick={this.addNewStationToGroup} disabled={this.state.selectedGroup === null}>
               <AddIcon />
             </Button>
-            <Button variant="fab" onClick={this.removeStationFromGroup} >
+            <Button variant="fab" mini color="secondary" onClick={this.removeStationFromGroup} disabled={this.state.selectedStation === null}>
               <DeleteIcon />
             </Button>
           </div>
@@ -144,21 +137,17 @@ export default class GroupContainer extends Component {
           stationList={stationList}
           selectedStation={selectedStation}
           selectedGroup={selectedGroup}
-        />        
+        />
 
       </div>
-      
+
     )
   }
 }
 
-async function getGroups() {
-  return await fetch('http://10.8.66.81:8083/api/groups')
-    .then((res) => res.json())
-}
 
-async function getStations() {
-  return await fetch('/assets/data/stations.json')
-    .then((res) => res.json())
-}
+// async function getStations() {
+//   return await fetch('/assets/data/stations.json')
+//     .then((res) => res.json())
+// }
 

@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-import CONFIG from '../config';
 
-import MissingPart from '../components/MissingPart';
-import { emit, subscribe } from '../socketClient';
+import MissingPart from '../../components/MissingPart';
+import { emit, subscribe } from '../../utils/socketClient';
 
-import '../css/MainContainer.css';
+import './MainContainer.css';
 
-import TestButton from '../components/TestButton';
+import TestButton from '../../components/TestButton';
 
-
+import { getPartsByGroup } from '../../utils/apiCalls';
 
 export default class MainContainer extends Component {
 
-    constructor(props) {
+    constructor(props) {       
 
         super(props);
 
@@ -26,31 +24,17 @@ export default class MainContainer extends Component {
 
         this.state = {
             groupId: +groupId,
-            partList: [...partList]
+            partList: []
         };
 
-        this.getPartsByGroup(this.state.groupId);
+        getPartsByGroup(this.state.groupId).then(p => this.setState({ partList: [...p] }));        
 
         subscribe('list update', this.handlePartEvent);
     }
 
-    getPartsByGroup = (groupId) => {
-        const url = CONFIG.apiServer + '/api/groups/' + groupId;
-        axios.get(url)
-        .then(partList => 
-            this.setState({ partList: [...partList.data] }))
-        // axios.get(url).then(partList => console.log(partList))
-    }
-
-    getPartsByBuffer = (groupId) => {
-        
-    }
-
-    handlePartEvent = (err, data) => {
-        // faz uma requisição baseada no ID do grupo
-        // atualiza todas as peças               
-        // this.audio.load();
-        this.getPartsByGroup(this.state.groupId);
+    handlePartEvent = (err, data) => {        
+        // this.audio.load();        
+        getPartsByGroup(this.state.groupId).then(p => this.setState({ partList: [...p] }));
         if (data) {
             console.log('Data received from socket:', data);
             if (!data.mute) {
@@ -104,8 +88,4 @@ export default class MainContainer extends Component {
 
 
 }
-
-const partList = [
-    { _id: 0, part: 0, module: 0, buffer: 0, date: 0 }
-];
 
