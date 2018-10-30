@@ -7,6 +7,14 @@
     margin-top: 1.5%;
 }
 
+.group-id-title {
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
 .header {
     display: flex;
     margin: 0 auto;
@@ -22,7 +30,7 @@
     width: 10%;
     background: black;
     color: blanchedalmond;
-    font-size: 1.5rem;    
+    font-size: 1.7rem;    
     padding: 0.7rem 0 0.7rem 0;
 }
 
